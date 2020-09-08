@@ -1,15 +1,20 @@
 package Application;
 
+import Classes.Pace;
+import Interface.OpenPace;
 import Settings.Settings;
 import Tools.Json;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 public class Main extends Application {
 
     public static Stage stage;
+
+    public static Pace pace;
 
     public static void main(String[] args) {
         Json.load();
@@ -27,12 +32,15 @@ public class Main extends Application {
 //        Pace pace = Pace.openPace();
     }
 
+    public static void openPace(File file) {
+
+    }
+
     public void start(Stage stage) {
         Main.stage = stage;
         Settings.ApplicationSettings.MainStagePref.applyPreferences(stage);
 
-
-        Scene scene = new Scene(new BorderPane());
+        Scene scene = new Scene(OpenPace.getInterface());
 
 
         stage.setScene(scene);
