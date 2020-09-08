@@ -7,6 +7,9 @@ public class TimeStamp {
     private int minute;
     private double second;
 
+    /**
+     * @param timeValue Total number of seconds since 00:00 (12:00 AM)
+     */
     public TimeStamp(double timeValue) {
         setTimeValue(timeValue);
     }
@@ -17,41 +20,66 @@ public class TimeStamp {
         this.second = second;
     }
 
+    /**
+     * @return Total number of seconds since 00:00 (12:00 AM)
+     */
     public double getTimeValue() {
         return hour * 3600 + minute * 60 + second;
     }
 
+    /**
+     * @param timeValue Total number of seconds since 00:00 (12:00 AM)
+     */
     public void setTimeValue(double timeValue) {
-        this.hour = (int) (timeValue / 3600) ;
+        this.hour = (int) (timeValue / 3600);
         this.minute = (int) ((timeValue - hour * 3600) / 60);
         this.second = timeValue - hour * 3600 - minute * 60;
         System.out.println(hour + " " + minute + " " + second);
     }
 
+    /**
+     * @return Total number of hours since 00:00 (12:00 AM)
+     */
     public int getHour() {
         return hour;
     }
 
-    public int getMinute() {
-        return minute;
-    }
-
-    public double getSecond() {
-        return second;
-    }
-
+    /**
+     * @param hour Total number of hours since 00:00 (12:00 AM)
+     */
     public void setHour(int hour) {
         this.hour = hour;
     }
 
+    /**
+     * @return Number of minutes since last hour
+     */
+    public int getMinute() {
+        return minute;
+    }
+
+    /**
+     * @param minute Number of minutes since last hour
+     */
     public void setMinute(int minute) {
         this.minute = minute;
     }
 
+    /**
+     * @return Number of seconds since last minute
+     */
+    public double getSecond() {
+        return second;
+    }
+
+    /**
+     * @param second Number of seconds since last minute
+     */
     public void setSecond(double second) {
         this.second = second;
     }
 
+    @Override
     public String toString() {
         return toString(false);
     }
@@ -59,21 +87,33 @@ public class TimeStamp {
     public String toString(boolean twelveHour) {
         DecimalFormat integerFormat = new DecimalFormat("00");
         DecimalFormat doubleFormat = new DecimalFormat("00.##");
-        if(twelveHour) {
-            return integerFormat.format(hour%12) + ":" + integerFormat.format(minute) + ":" + doubleFormat.format(second) + " " + (hour >= 12 ? "PM" : "AM");
+        if (twelveHour) {
+            return integerFormat.format(hour % 12) + ":" + integerFormat.format(minute) + ":" + doubleFormat.format(second) + " " + (hour >= 12 ? "PM" : "AM");
         } else {
             return integerFormat.format(hour) + ":" + integerFormat.format(minute) + ":" + doubleFormat.format(second);
         }
     }
 
+    /**
+     * @param other {@link TimeStamp} to compare to
+     * @return {@code True} if this {@link TimeStamp} marks a time before {@code other}
+     */
     public boolean isBefore(TimeStamp other) {
         return other.getTimeValue() > this.getTimeValue();
     }
 
+    /**
+     * @param other {@link TimeStamp} to compare to
+     * @return {@code True} if this {@link TimeStamp} marks a time after {@code other}
+     */
     public boolean isAfter(TimeStamp other) {
         return other.getTimeValue() < this.getTimeValue();
     }
 
+    /**
+     * @param other {@link TimeStamp} to compare to
+     * @return {@code True} if this {@link TimeStamp} marks a time the same as {@code other}
+     */
     public boolean isEqual(TimeStamp other) {
         return other.getTimeValue() == this.getTimeValue();
     }
