@@ -176,6 +176,10 @@ public class Team {
 
         private final String display;
 
+        public String getDisplay() {
+            return display;
+        }
+
         Status(String display) {
             this.display = display;
         }
