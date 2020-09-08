@@ -1,11 +1,8 @@
 package Application;
 
-import Classes.Time;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Main extends Application {

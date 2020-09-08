@@ -1,12 +1,11 @@
 package Classes;
 
-public class Time {
-
+public class TimeStamp {
     private int hour;
     private int minute;
     private double second;
 
-    public Time(double timeValue) {
+    public TimeStamp(double timeValue) {
         this.hour = (int) (timeValue / 3600) ;
         this.minute = (int) ((timeValue - hour * 3600) / 60);
         this.second = timeValue - hour * 3600 - minute * 60;
