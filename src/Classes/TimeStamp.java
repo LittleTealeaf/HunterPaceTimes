@@ -53,7 +53,7 @@ public class TimeStamp {
     }
 
     public String toString() {
-        return toString(true);
+        return toString(false);
     }
 
     public String toString(boolean twelveHour) {
@@ -76,5 +76,9 @@ public class TimeStamp {
 
     public boolean isEqual(TimeStamp other) {
         return other.getTimeValue() == this.getTimeValue();
+    }
+
+    public TimeStamp getElapsed(TimeStamp other) {
+        return new TimeStamp(Math.abs(this.getTimeValue() - other.getTimeValue()));
     }
 }
