@@ -16,12 +16,12 @@ import java.nio.file.Files;
  * <p>This method uses the {@link Gson} resource to generate {@code JSON} files</p>
  *
  * @author Tealeaf
- * @version 0.1.0
+ * @version 0.1.1
  * @since 0.1.0
  */
 public class Json {
 
-    private static final String appDir = AppDirsFactory.getInstance().getUserDataDir("Gear Planner", "", "Tealeaf", true);
+    private static final String appDir = AppDirsFactory.getInstance().getUserDataDir("Hunter Pace Times", "", "Tealeaf", true);
 
     private static Gson gStatic;
     private static Gson gObject;
@@ -65,7 +65,11 @@ public class Json {
      * @since 0.1.0
      */
     public static void serialize(Object src, boolean isStatic, Writer writer) {
-        (isStatic ? gStatic : gObject).toJson(src, writer);
+        try {
+            (isStatic ? gStatic : gObject).toJson(src, writer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -139,7 +143,7 @@ public class Json {
     @SuppressWarnings("UnusedReturnValue")
     public static Object readObject(boolean isStatic, Type cls, String... path) {
         try {
-            return deserialize(Files.newBufferedReader(getFile("Settings.json").toPath()), isStatic, cls);
+            return deserialize(Files.newBufferedReader(getFile(path).toPath()), isStatic, cls);
         } catch (Exception e) {
             return null;
         }

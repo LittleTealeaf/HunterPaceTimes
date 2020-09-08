@@ -1,15 +1,52 @@
 package Classes;
 
+import Application.Main;
+import Tools.Json;
+import javafx.stage.FileChooser;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Pace {
 
-	private final List<Division> divisions = new ArrayList<>();
-	private List<Team> teams = new ArrayList<>();
+	private static final String fileExtension = ".pace";
 
+	private List<Division> divisions = new ArrayList<>();
+	private List<Team> teams = new ArrayList<>();
+	private transient File file;
 
 	public Pace() {
+
+	}
+
+	/**
+	 * Creates a Pace from a given file. Nothing will import if it fails or if file is non existant. TODO elaborate
+	 *
+	 * @param file
+	 */
+	public Pace(File file) {
+		this.file = file;
+		if (file.exists()) try {
+			Pace copy = (Pace) Json.deserialize(new BufferedReader(new FileReader(file)), false, Pace.class);
+			this.divisions = copy.divisions;
+			this.teams = copy.teams;
+		} catch (Exception ignored) {
+		}
+	}
+
+	public static Pace openPace() {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Pace");
+		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Pace", "*.pace"));
+		return new Pace(fileChooser.showOpenDialog(Main.stage));
+	}
+
+	public File getFile() { // unsure if need
+		return file;
 	}
 
 	public List<Team> getTeams() {
@@ -80,5 +117,33 @@ public class Pace {
 		return teams;
 	}
 
+	public void setFile(File file) { //unsure if need
+		this.file = file;
+	}
 
+	public void save() {
+		if (file == null) {
+			saveAs();
+		} else try {
+			FileWriter writer = new FileWriter(file);
+			Json.serialize(this, false, writer);
+			writer.close();
+		} catch (Exception ignore) {
+		}
+	}
+
+	public void saveAs() {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Save Pace As");
+		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Pace", "*.pace"));
+		file = fileChooser.showSaveDialog(Main.stage);
+
+		try {
+			file.getParentFile().mkdir();
+			file.createNewFile();
+			save();
+		} catch (Exception ignored) {
+		} //TODO specify the exception
+
+	}
 }
