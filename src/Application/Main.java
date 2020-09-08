@@ -1,5 +1,6 @@
 package Application;
 
+import Settings.Settings;
 import Tools.Json;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -28,12 +29,8 @@ public class Main extends Application {
 
     public void start(Stage stage) {
         Main.stage = stage;
+        Settings.ApplicationSettings.MainStagePref.applyPreferences(stage);
 
-        stage.setMaximized(Settings.maximized);
-        stage.maximizedProperty().addListener((e, o, n) -> {
-            Settings.maximized = n.booleanValue();
-            Settings.save();
-        });
 
         Scene scene = new Scene(new BorderPane());
 
