@@ -16,24 +16,24 @@ public class StagePreferences {
 		stage.setMaximized(maximized);
 		stage.maximizedProperty().addListener((e, o, n) -> {
 			maximized = n.booleanValue();
-			SettingsUpdater.requestSave();
+			Settings.save();
 		});
 
 		if (width == null || height == null) {
 			width = stage.getWidth();
 			height = stage.getHeight();
-			SettingsUpdater.requestSave();
+			Settings.save();
 		} else {
 			stage.setWidth(width);
 			stage.setHeight(height);
 		}
 		stage.widthProperty().addListener((e, o, n) -> {
 			width = n.doubleValue();
-			SettingsUpdater.requestSave();
+			Settings.save();
 		});
 		stage.heightProperty().addListener((e, o, n) -> {
 			height = n.doubleValue();
-			SettingsUpdater.requestSave();
+			Settings.save();
 		});
 
 
