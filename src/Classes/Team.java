@@ -84,6 +84,18 @@ public class Team {
         return this;
     }
 
+    public Status getStatus() {
+        return start == null ? Status.IN : finish == null ? Status.OUT : Status.BACK;
+    }
 
+    enum Status {
+        IN("In"),OUT("Out"),BACK("Back");
+
+        private String display;
+
+        Status(String display) {
+            this.display = display;
+        }
+    }
 
 }
