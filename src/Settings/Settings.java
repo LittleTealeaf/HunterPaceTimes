@@ -41,4 +41,5 @@ public class Settings {
 		Json.saveObject(new Settings(), true, "Settings.json");
 	}
 
+
 }

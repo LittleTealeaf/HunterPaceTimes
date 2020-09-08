@@ -33,7 +33,7 @@ public class Json {
      */
     public static void load() {
         //Create the builder
-        GsonBuilder builder = new GsonBuilder().setPrettyPrinting();
+        GsonBuilder builder = new GsonBuilder().setPrettyPrinting().serializeSpecialFloatingPointValues();
 
         //Add any custom serialization and deserialization methods
 
