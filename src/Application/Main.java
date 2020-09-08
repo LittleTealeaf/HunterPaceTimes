@@ -12,6 +12,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         Json.load();
+        Settings.load();
 
 
         launch(args);
@@ -27,6 +28,12 @@ public class Main extends Application {
 
     public void start(Stage stage) {
         Main.stage = stage;
+
+        stage.setMaximized(Settings.maximized);
+        stage.maximizedProperty().addListener((e, o, n) -> {
+            Settings.maximized = n.booleanValue();
+            Settings.save();
+        });
 
         Scene scene = new Scene(new BorderPane());
 
