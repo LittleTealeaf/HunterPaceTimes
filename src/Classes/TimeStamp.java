@@ -94,31 +94,22 @@ public class TimeStamp {
         }
     }
 
-    /**
-     * @param other {@link TimeStamp} to compare to
-     * @return {@code True} if this {@link TimeStamp} marks a time before {@code other}
-     */
-    public boolean isBefore(TimeStamp other) {
+
+    public boolean isLessThan(TimeStamp other) {
         return other.getTimeValue() > this.getTimeValue();
     }
 
-    /**
-     * @param other {@link TimeStamp} to compare to
-     * @return {@code True} if this {@link TimeStamp} marks a time after {@code other}
-     */
-    public boolean isAfter(TimeStamp other) {
+
+    public boolean isGreaterThan(TimeStamp other) {
         return other.getTimeValue() < this.getTimeValue();
     }
 
-    /**
-     * @param other {@link TimeStamp} to compare to
-     * @return {@code True} if this {@link TimeStamp} marks a time the same as {@code other}
-     */
+
     public boolean isEqual(TimeStamp other) {
         return other.getTimeValue() == this.getTimeValue();
     }
 
-    public TimeStamp getElapsed(TimeStamp other) {
+    public TimeStamp getDifference(TimeStamp other) {
         return new TimeStamp(Math.abs(this.getTimeValue() - other.getTimeValue()));
     }
 }

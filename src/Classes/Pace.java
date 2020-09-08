@@ -144,6 +144,41 @@ public class Pace {
 			save();
 		} catch (Exception ignored) {
 		} //TODO specify the exception
+	}
 
+	public Team[] getPlaces(Division division) {
+		//Escape Cases
+		if (!divisions.contains(division) || division.getGoalTime() == null) {
+			return null;
+		}
+
+		//Get all teams in division
+		List<Team> divTeams = new ArrayList<>();
+		for (Team team : teams) {
+			if (team.isDivision(division)) {
+				divTeams.add(team);
+			}
+		}
+
+		//Calculate resultant times
+		Team[] places = new Team[divTeams.size()];
+
+		for (int i = 0; i < places.length; i++) {
+			TimeStamp closestDifference = null;
+			Team closestTeam = null;
+
+			for (Team team : divTeams) {
+				TimeStamp difference = team.getElapsedTime().getDifference(division.getGoalTime());
+				if (closestTeam == null | difference.isLessThan(closestDifference)) {
+					closestTeam = team;
+					closestDifference = difference;
+				}
+			}
+			places[i] = closestTeam;
+			divTeams.remove(closestTeam);
+		}
+
+
+		return places;
 	}
 }
