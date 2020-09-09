@@ -15,7 +15,7 @@ public class Pace {
 
 	private static final String fileExtension = ".pace";
 
-	private List<Division> divisions = new ArrayList<>();
+	private final List<Division> divisions = new ArrayList<>();
 	private List<Team> teams = new ArrayList<>();
 	private transient File file;
 
@@ -23,26 +23,22 @@ public class Pace {
 
 	}
 
-	/**
-	 * Creates a Pace from a given file. Nothing will import if it fails or if file is non existant. TODO elaborate
-	 *
-	 * @param file
-	 */
-	public Pace(File file) {
-		this.file = file;
-		if (file.exists()) try {
-			Pace copy = (Pace) Json.deserialize(new BufferedReader(new FileReader(file)), false, Pace.class);
-			this.divisions = copy.divisions;
-			this.teams = copy.teams;
-		} catch (Exception ignored) {
-		}
-	}
-
-	public static Pace openPace() {
+	public static Pace openPaceFile() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Pace");
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Pace", "*.pace"));
-		return new Pace(fileChooser.showOpenDialog(Main.stage));
+		return fromFile(fileChooser.showOpenDialog(Main.stage));
+	}
+
+	public static Pace fromFile(File file) {
+		if (file != null && file.exists()) try {
+			Pace pace = (Pace) Json.deserialize(new BufferedReader(new FileReader(file)), false, Pace.class);
+			pace.file = file;
+			return pace;
+		} catch (Exception ignored) {
+		}
+
+		return null;
 	}
 
 	public File getFile() { // unsure if need
