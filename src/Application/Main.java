@@ -27,7 +27,16 @@ public class Main extends Application {
     }
 
     public static void openPace(Pace pace) {
-        System.out.println("Opening pace from file " + (pace.getFile() != null ? pace.getFile().getPath() : "null"));
+        if (pace.getFile() != null) {
+            boolean contains = false;
+            for (String string : Settings.ApplicationSettings.recentFiles) {
+                if (string.contentEquals(pace.getFile().getPath())) contains = true;
+            }
+            if (!contains) {
+                Settings.ApplicationSettings.recentFiles.add(pace.getFile().getPath());
+                Settings.save();
+            }
+        }
     }
 
     public void start(Stage stage) {

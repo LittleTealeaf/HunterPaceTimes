@@ -13,21 +13,24 @@ public class Settings {
 
 
 	public static class User {
-		public static boolean showCrashReports = true;
 
 		public User() {
 		}
 
 		public static boolean updateDivisionsOnTeamsEdit = true;
+
+		public static boolean showCrashReports = true;
 	}
 
 	public static class ApplicationSettings {
+		public ApplicationSettings() {
+		}
+
+
 		public static StagePreferences MainStagePref = new StagePreferences();
 		public static List<String> recentFiles = new ArrayList<String>();
 
 
-		public ApplicationSettings() {
-		}
 	}
 
 	public Settings() {
