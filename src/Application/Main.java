@@ -15,18 +15,17 @@ public class Main extends Application {
         public void run() {
             try {
                 while (saveRequests != -1) {
-                    System.out.println("Starting Settings Thread");
                     while (saveRequests == 0) {
                         sleep(1000);
                     }
-                    System.out.println("Detected Change");
-                    while (saveRequests > 0) {
-                        sleep(500);
+                    int maxWait = 5;
+                    while (saveRequests > 0 && maxWait > 0) {
+                        sleep(100);
+                        maxWait--;
                         saveRequests--;
                     }
                     Settings.save();
                 }
-                System.out.println("Escaped");
             } catch(Exception e) {}
         }
     };
