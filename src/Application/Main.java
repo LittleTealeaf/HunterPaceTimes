@@ -10,10 +10,18 @@ public class Main extends Application {
 
     public static Stage stage;
 
+    private static int saveRequests = 0;
+    private static Thread settingsThread = new Thread() {
+        public void run() {
+            try {
+
+            } catch(Exception e) {}
+        }
+    };
+
     public static void main(String[] args) {
         Json.load();
         Settings.load();
-
 
         launch(args);
     }

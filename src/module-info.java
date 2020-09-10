@@ -3,7 +3,6 @@ module HunterPaceTimes {
 	exports Classes;
 
 	opens Classes to javafx.base, com.google.gson;
-	opens Settings to com.google.gson;
 
 	requires javafx.base;
 	requires transitive javafx.graphics;
