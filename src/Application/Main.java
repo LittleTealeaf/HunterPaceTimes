@@ -1,6 +1,5 @@
 package Application;
 
-import Settings.Settings;
 import Tools.Json;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -29,8 +28,6 @@ public class Main extends Application {
 
     public void start(Stage stage) {
         Main.stage = stage;
-        Settings.ApplicationSettings.MainStagePref.applyPreferences(stage);
-
 
         Scene scene = new Scene(new BorderPane());
 
