@@ -163,6 +163,14 @@ public class Team {
         return start == null ? Status.IN : finish == null ? Status.OUT : Status.BACK;
     }
 
+    public boolean isDivision(Division division) {
+        return division.getName().contentEquals(this.division);
+    }
+
+    public TimeStamp getElapsedTime() {
+        return finish.getDifference(start);
+    }
+
     /**
      * Indicates the current status of a {@link Team}
      * <p><ul>
