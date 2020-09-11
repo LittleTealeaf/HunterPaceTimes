@@ -14,11 +14,17 @@ import java.util.List;
 
 public class ProgramTeams {
 
+	public static TableView table;
+
+	/**
+	 * @return Tab to display
+	 */
 	public static Tab getTab() {
 		Tab tab = new Tab("Teams");
 
+		table = createTable();
 
-		VBox content = new VBox(createTable());
+		VBox content = new VBox(table);
 
 
 		tab.setContent(content);
@@ -27,6 +33,16 @@ public class ProgramTeams {
 		return tab;
 	}
 
+	/**
+	 * Creates the table to list all riders
+	 * <p>
+	 * The table contains the following columns: <i>Team, Division, Riders, Times (Start, Finish, Elapsed), and
+	 * Notes</i>. Each one has a display type factor of {@link String}. <i>Riders</i> uses a custom cell
+	 * display found in {@link #getNamesCell()}
+	 * </p>
+	 *
+	 * @return Table with riders on the pace
+	 */
 	private static TableView<Team> createTable() {
 		TableView<Team> table = new TableView<>();
 		table.setEditable(false);
@@ -69,6 +85,11 @@ public class ProgramTeams {
 		return table;
 	}
 
+	/**
+	 * Custom Formatting for the Names column
+	 *
+	 * @return TableCell formatted for Names
+	 */
 	public static TableCell<Team, String> getNamesCell() {
 		return new TableCell<Team, String>() {
 			@Override

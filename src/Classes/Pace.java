@@ -23,6 +23,11 @@ public class Pace {
 
 	}
 
+	/**
+	 * Opens a pace from a file
+	 *
+	 * @return Resultant {@link Pace} class extracted from the file
+	 */
 	public static Pace openPaceFile() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Pace");
@@ -103,6 +108,12 @@ public class Pace {
 		}
 	}
 
+	/**
+	 * Returns a list of teams by a certain status
+	 *
+	 * @param status {@link Team.Status Status} to filter teams by
+	 * @return {@link List} of teams who have the specified Status
+	 */
 	public List<Team> getTeamsByStatus(Team.Status status) {
 		List<Team> teams = new ArrayList<>();
 		for (Team team : this.teams) {
@@ -142,9 +153,18 @@ public class Pace {
 		} //TODO specify the exception
 	}
 
+	/**
+	 * Returns the places of a specific division
+	 *
+	 * @param division
+	 * @return {@link Team} array of all teams in that division, in order of closeness to the goal time <p>
+	 * Returns {@code Null} if {@code division} is null, if it cannot be found in the current list of divisions,
+	 * or if the {@code division} does not have a goal time
+	 * </p>
+	 */
 	public Team[] getPlaces(Division division) {
 		//Escape Cases
-		if (!divisions.contains(division) || division.getGoalTime() == null) {
+		if (division == null || !divisions.contains(division) || division.getGoalTime() == null) {
 			return null;
 		}
 
