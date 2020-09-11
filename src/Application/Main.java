@@ -1,18 +1,17 @@
 package Application;
 
+import Classes.Pace;
+import Interface.Program;
+import Interface.Welcome;
 import Tools.Json;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import Classes.Pace;
-import Interface.Welcome;
-import Settings.Settings;
-import Tools.Json;
 
 public class Main extends Application {
 
     public static Stage stage;
+    public static final String version = "0.0.1-Dev";
 
     private static int saveRequests = 0;
     private static final Thread settingsThread = new Thread() {
@@ -42,9 +41,6 @@ public class Main extends Application {
         launch(args);
     }
 
-    public static void test() {
-    }
-
     private static void updateDimSettings() {
         Settings.ApplicationDisplay.height = stage.getHeight();
         Settings.ApplicationDisplay.width = stage.getWidth();
@@ -59,14 +55,16 @@ public class Main extends Application {
 	public static void openPace(Pace pace) {
         if (pace.getFile() != null) {
             boolean contains = false;
-            for (String string : Settings.ApplicationSettings.recentFiles) {
+            for (String string : Settings.recentFiles) {
                 if (string.contentEquals(pace.getFile().getPath())) contains = true;
             }
             if (!contains) {
-                Settings.ApplicationSettings.recentFiles.add(pace.getFile().getPath());
+                Settings.recentFiles.add(pace.getFile().getPath());
                 Settings.save();
             }
         }
+
+        stage.setScene(Program.getInterface(pace));
     }
 
     public void start(Stage stage) {
@@ -88,6 +86,5 @@ public class Main extends Application {
 
         stage.setScene(scene);
         stage.show();
-        test();
     }
 }

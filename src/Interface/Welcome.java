@@ -1,8 +1,8 @@
 package Interface;
 
 import Application.Main;
+import Application.Settings;
 import Classes.Pace;
-import Settings.Settings;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
@@ -43,8 +43,8 @@ public class Welcome {
 		VBox list = new VBox(header);
 
 		//Each recent file entry
-		for (int i = 0; i < Settings.ApplicationSettings.recentFiles.size(); i++) {
-			String iniPath = Settings.ApplicationSettings.recentFiles.get(i);
+		for (int i = 0; i < Settings.recentFiles.size(); i++) {
+			String iniPath = Settings.recentFiles.get(i);
 			File file = new File(iniPath);
 
 			Text name = new Text(file.getName());
@@ -61,7 +61,7 @@ public class Welcome {
 
 			Button remove = new Button("X");
 			remove.setOnAction(e -> {
-				Settings.ApplicationSettings.recentFiles.remove(iniPath);
+				Settings.recentFiles.remove(iniPath);
 				Settings.save();
 				contentPane.setLeft(recentFileList());
 			});

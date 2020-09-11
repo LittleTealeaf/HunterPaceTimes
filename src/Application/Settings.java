@@ -2,10 +2,14 @@ package Application;
 
 import Tools.Json;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Settings {
 
 	public static boolean showCrashReports = true;
 	public static boolean updateDivisionsOnTeamsEdit = true;
+	public static List<String> recentFiles = new ArrayList<>();
 
 	public static class ApplicationDisplay {
 		public static double height = 400;
