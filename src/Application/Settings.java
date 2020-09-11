@@ -13,8 +13,10 @@ import java.util.List;
  *
  * @see Json
  */
+@SuppressWarnings("CanBeFinal")
 public class Settings {
 
+	@SuppressWarnings("FieldCanBeLocal")
 	private static ApplicationDisplay applicationDisplay = new ApplicationDisplay();
 	/**
 	 * Whether or not the program should display crash reports (TODO implement)

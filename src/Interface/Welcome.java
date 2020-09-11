@@ -103,9 +103,7 @@ public class Welcome {
 		optionContent.setVgap(10);
 
 		Button create = new Button("Create a new Pace");
-		create.setOnAction(e -> {
-			Main.openPace(new Pace());
-		});
+		create.setOnAction(e -> Main.openPace(new Pace()));
 		optionContent.add(create, 0, 0);
 
 		Button open = new Button("Open a .pace file");

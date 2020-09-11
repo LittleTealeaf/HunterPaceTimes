@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 
 public class ProgramTeams {
 
-	public static TableView table;
+	public static TableView<Team> table;
 
 	/**
 	 * @return Tab to display
@@ -61,17 +61,18 @@ public class ProgramTeams {
 				cNotes = new TableColumn<>("Notes");
 
 		//Assign Columns to variables
-		cNumber.setCellValueFactory(new PropertyValueFactory<Team, String>("teamNumber"));
-		cDivision.setCellValueFactory(new PropertyValueFactory<Team, String>("division"));
-		cNames.setCellValueFactory(new PropertyValueFactory<Team, String>("namesAsString"));
-		ctStart.setCellValueFactory(new PropertyValueFactory<Team, String>("startAsString"));
-		ctFinish.setCellValueFactory(new PropertyValueFactory<Team, String>("finishAsString"));
-		ctElapsed.setCellValueFactory(new PropertyValueFactory<Team, String>("elapsedAsString"));
-		cNotes.setCellValueFactory(new PropertyValueFactory<Team, String>("notesFirstLine"));
+		cNumber.setCellValueFactory(new PropertyValueFactory<>("teamNumber"));
+		cDivision.setCellValueFactory(new PropertyValueFactory<>("division"));
+		cNames.setCellValueFactory(new PropertyValueFactory<>("namesAsString"));
+		ctStart.setCellValueFactory(new PropertyValueFactory<>("startAsString"));
+		ctFinish.setCellValueFactory(new PropertyValueFactory<>("finishAsString"));
+		ctElapsed.setCellValueFactory(new PropertyValueFactory<>("elapsedAsString"));
+		cNotes.setCellValueFactory(new PropertyValueFactory<>("notesFirstLine"));
 
 		cTimes.getColumns().addAll(ctStart, ctFinish, ctElapsed);
 
-		for (TableColumn col : new TableColumn[]{cDivision, cNames, cTimes, ctStart, ctFinish, ctElapsed, cNotes}) {
+		for (TableColumn<Team, String> col : new TableColumn[]{cDivision, cNames, cTimes, ctStart, ctFinish, ctElapsed,
+				cNotes}) {
 			col.setEditable(false);
 			col.setReorderable(false);
 		}

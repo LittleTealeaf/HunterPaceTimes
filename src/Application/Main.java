@@ -27,25 +27,23 @@ public class Main extends Application {
 	 * close itself
 	 * </p>
 	 */
-	private static final Thread settingsThread = new Thread() {
-		public void run() {
-			try {
-				while (saveRequests != -1) {
-					while (saveRequests == 0) {
-						sleep(1000);
-					}
-					int maxWait = 5;
-					while (saveRequests > 0 && maxWait > 0) {
-						sleep(100);
-						maxWait--;
-						saveRequests--;
-					}
-					Settings.save();
+	private static final Thread settingsThread = new Thread(() -> {
+		try {
+			while (saveRequests != -1) {
+				while (saveRequests == 0) {
+					Thread.sleep(1000);
 				}
-			} catch (Exception e) {
+				int maxWait = 5;
+				while (saveRequests > 0 && maxWait > 0) {
+					Thread.sleep(100);
+					maxWait--;
+					saveRequests--;
+				}
+				Settings.save();
 			}
+		} catch (Exception ignored) {
 		}
-	};
+	});
 
 	public static void main(String[] args) {
 		Json.load();
@@ -107,9 +105,7 @@ public class Main extends Application {
 
 		Scene scene = new Scene(Welcome.getInterface());
 
-		stage.setOnCloseRequest(e -> {
-			saveRequests = -1;
-		});
+		stage.setOnCloseRequest(e -> saveRequests = -1);
 
 		stage.setHeight(Settings.ApplicationDisplay.height);
 		stage.setWidth(Settings.ApplicationDisplay.width);

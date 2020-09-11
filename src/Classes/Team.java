@@ -95,7 +95,7 @@ public class Team {
 	public String getNamesAsString() {
 		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < names.length; i++) {
-			builder.append(names[i] + (i < names.length - 1 ? "\n" : ""));
+			builder.append(names[i]).append(i < names.length - 1 ? "\n" : "");
 		}
 		return builder.toString();
 	}

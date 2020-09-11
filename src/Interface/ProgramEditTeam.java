@@ -12,8 +12,8 @@ import javafx.stage.Stage;
 
 public class ProgramEditTeam {
 
-	public Team team;
-	public Stage stage;
+	private final Team team;
+	private final Stage stage;
 
 	public ProgramEditTeam(Team t) {
 		this.team = t != null ? t : new Team("");

@@ -74,7 +74,7 @@ public class Pace {
 		return teams;
 	}
 
-	public void setTeams() {
+	public void setTeams(List<Team> teams) {
 		this.teams = teams;
 	}
 
@@ -150,7 +150,7 @@ public class Pace {
 	 * @return {@link List} of teams, excluding those marked as excluded from scores
 	 */
 	public List<Team> getTeamsNotExcluded() {
-		List<Team> includedTeams = new ArrayList<Team>();
+		List<Team> includedTeams = new ArrayList<>();
 		for (Team team : teams)
 			if (!team.isExcluded()) {
 				includedTeams.add(team);
