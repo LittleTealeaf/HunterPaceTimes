@@ -10,6 +10,7 @@ import java.util.List;
  * start up, and whenever {@link Main#saveSettings()} is called. {@link #save()} should <b>not</b> be called from
  * anywhere except for {@link Main#saveSettings()} so that the application doesn't save the file too much in a given
  * timeframe.
+ *
  * @see Json
  */
 public class Settings {
@@ -33,6 +34,9 @@ public class Settings {
 	 */
 	public static boolean displayTwelveHour = true;
 
+	public Settings() {
+	}
+
 	/**
 	 * Initial Loading of the settings file. This will read the file using the {@link Json} tool, converting it to an
 	 * object, and assigning the setting values. After initial loading, it will save the file in order to apply any
@@ -48,10 +52,6 @@ public class Settings {
 
 	}
 
-
-	public Settings() {
-	}
-
 	/**
 	 * Saves the settings into a file using the {@link Json} tool
 	 */
@@ -64,15 +64,12 @@ public class Settings {
 	 * or not the application is set as fullscreen.
 	 */
 	public static class ApplicationDisplay {
-		public ApplicationDisplay() {
-		}
-
 		public static double height = 400;
 		public static double width = 500;
 		public static boolean fullscreen = false;
+		public ApplicationDisplay() {
+		}
 	}
-
-
 
 
 }

@@ -47,6 +47,7 @@ public class Pace {
 
 	/**
 	 * Creates a new {@link Pace} object from a given file, setting the {@link #file} variable as the original file
+	 *
 	 * @param file File containing the Json data of the {@link Pace}
 	 * @return A new {@link Pace} object with data extracted from the File's Json
 	 */
@@ -63,6 +64,10 @@ public class Pace {
 
 	public File getFile() { // unsure if need
 		return file;
+	}
+
+	public void setFile(File file) { //unsure if need
+		this.file = file;
 	}
 
 	public List<Team> getTeams() {
@@ -141,6 +146,7 @@ public class Pace {
 
 	/**
 	 * Returns only the {@link Team teams} that are not flagged as being excluded from the final scores
+	 *
 	 * @return {@link List} of teams, excluding those marked as excluded from scores
 	 */
 	public List<Team> getTeamsNotExcluded() {
@@ -150,10 +156,6 @@ public class Pace {
 				includedTeams.add(team);
 			}
 		return includedTeams;
-	}
-
-	public void setFile(File file) { //unsure if need
-		this.file = file;
 	}
 
 	/**
@@ -174,6 +176,7 @@ public class Pace {
 	/**
 	 * Displays a new file chooser interface, asking the user to specify a file name and path to save the
 	 * {@link Pace} to
+	 *
 	 * @see #save()
 	 */
 	public void saveAs() {
@@ -207,7 +210,7 @@ public class Pace {
 	/**
 	 * Returns the places of a specific division
 	 *
-	 * @param division Specific Division to return the places for
+	 * @param division        Specific Division to return the places for
 	 * @param includeExcluded Whether or not to include teams marked with the {@code excluded from scores} identifier.
 	 *                        If this is set to {@code true}, only teams that are not included (by default for
 	 *                        new teams) will be added to the places.
