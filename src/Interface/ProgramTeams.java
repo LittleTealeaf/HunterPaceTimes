@@ -23,6 +23,7 @@ public class ProgramTeams {
 		Tab tab = new Tab("Teams");
 
 		table = createTable();
+		updateTable();
 
 		VBox content = new VBox(table);
 
@@ -63,13 +64,13 @@ public class ProgramTeams {
 		});
 
 		//Assign Columns to variables
-		cNumber.setCellValueFactory(new PropertyValueFactory<Team, String>("team"));
+		cNumber.setCellValueFactory(new PropertyValueFactory<Team, String>("teamNumber"));
 		cDivision.setCellValueFactory(new PropertyValueFactory<Team, String>("division"));
 		cNames.setCellValueFactory(new PropertyValueFactory<Team, String>("namesAsString"));
 		ctStart.setCellValueFactory(new PropertyValueFactory<Team, String>("startAsString"));
 		ctFinish.setCellValueFactory(new PropertyValueFactory<Team, String>("finishAsString"));
 		ctElapsed.setCellValueFactory(new PropertyValueFactory<Team, String>("elapsedAsString"));
-		//cNotes.setCellValueFactory(new PropertyValueFactory<Team,String>("notesAsString"));
+		cNotes.setCellValueFactory(new PropertyValueFactory<Team, String>("notesFirstLine"));
 
 		cTimes.getColumns().addAll(ctStart, ctFinish, ctElapsed);
 
@@ -83,6 +84,12 @@ public class ProgramTeams {
 		table.getColumns().addAll(cNumber, cDivision, cNames, cTimes, cNotes);
 
 		return table;
+	}
+
+	private static void updateTable() {
+		table.getItems().clear();
+		table.getItems().addAll(Program.pace.getTeams());
+
 	}
 
 	/**

@@ -84,15 +84,15 @@ public class Team {
     }
 
     public String getStartAsString() {
-        return start.toString(Settings.displayTwelveHour);
+        return start != null ? start.toString(Settings.displayTwelveHour) : "";
     }
 
     public String getFinishAsString() {
-        return finish.toString(Settings.displayTwelveHour);
+        return finish != null ? finish.toString(Settings.displayTwelveHour) : "";
     }
 
     public String getElapsedAsString() {
-        return getElapsedTime().toString(false);
+        return getElapsedTime() != null ? getElapsedTime().toString(false) : "";
     }
 
     /**
@@ -190,7 +190,11 @@ public class Team {
     }
 
     public TimeStamp getElapsedTime() {
-        return finish.getDifference(start);
+        return (finish != null && start != null) ? finish.getDifference(start) : null;
+    }
+
+    public String getNotesFirstLine() {
+        return (notes != null && notes.length > 0) ? notes[0] : "";
     }
 
     /**
