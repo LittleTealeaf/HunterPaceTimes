@@ -124,6 +124,15 @@ public class Pace {
 		return teams;
 	}
 
+	public List<Team> getTeamsNotExcluded() {
+		List<Team> includedTeams = new ArrayList<Team>();
+		for (Team team : teams)
+			if (!team.isExcluded()) {
+				includedTeams.add(team);
+			}
+		return includedTeams;
+	}
+
 	public void setFile(File file) { //unsure if need
 		this.file = file;
 	}
@@ -159,10 +168,28 @@ public class Pace {
 	 * @param division
 	 * @return {@link Team} array of all teams in that division, in order of closeness to the goal time <p>
 	 * Returns {@code Null} if {@code division} is null, if it cannot be found in the current list of divisions,
-	 * or if the {@code division} does not have a goal time
+	 * or if the {@code division} does not have a goal time.
+	 * <br>This method will excluded any teams marked with the excluded from final scores tab
 	 * </p>
 	 */
 	public Team[] getPlaces(Division division) {
+		return getPlaces(division, true);
+	}
+
+	/**
+	 * Returns the places of a specific division
+	 *
+	 * @param division
+	 * @param includeExcluded Whether or not to include teams marked with the {@code excluded from scores} identifier.
+	 *                        If this is set to {@code true}, only teams that are not included (by default for
+	 *                        new teams) will be added to the places.
+	 *                        If set to {@code false}, then all teams, regardless of their exclusion tag, will be
+	 *                        included in the scores
+	 * @return {@link Team} array of all teams in that division, in order of closeness to the goal time <p>
+	 * Returns {@code Null} if {@code division} is null, if it cannot be found in the current list of divisions,
+	 * or if the {@code division} does not have a goal time.
+	 */
+	public Team[] getPlaces(Division division, boolean includeExcluded) {
 		//Escape Cases
 		if (division == null || !divisions.contains(division) || division.getGoalTime() == null) {
 			return null;
@@ -171,7 +198,7 @@ public class Pace {
 		//Get all teams in division
 		List<Team> divTeams = new ArrayList<>();
 		for (Team team : teams) {
-			if (team.isDivision(division)) {
+			if (team.isDivision(division) && !(includeExcluded || team.isExcluded())) {
 				divTeams.add(team);
 			}
 		}

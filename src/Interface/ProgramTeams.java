@@ -83,6 +83,7 @@ public class ProgramTeams {
 
 		table.getColumns().addAll(cNumber, cDivision, cNames, cTimes, cNotes);
 
+
 		return table;
 	}
 
