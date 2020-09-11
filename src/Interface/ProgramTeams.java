@@ -84,6 +84,9 @@ public class ProgramTeams {
 		return table;
 	}
 
+	/**
+	 * Updates the table with the current pace's teams
+	 */
 	public static void updateTable() {
 		table.getItems().clear();
 		table.getItems().addAll(Program.pace.getTeams());

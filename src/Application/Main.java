@@ -67,9 +67,11 @@ public class Main extends Application {
      * @see #saveSettings()
      */
     private static void updateDimSettings() {
-        Settings.ApplicationDisplay.height = stage.getHeight();
-        Settings.ApplicationDisplay.width = stage.getWidth();
         Settings.ApplicationDisplay.fullscreen = stage.isFullScreen();
+        if(!stage.isFullScreen()) {
+            Settings.ApplicationDisplay.height = stage.getHeight();
+            Settings.ApplicationDisplay.width = stage.getWidth();
+        }
         saveSettings();
     }
 

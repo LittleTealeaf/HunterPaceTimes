@@ -11,6 +11,13 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An object containing all data of a given pace. This class contains the list of {@link Division divisions} and
+ * {@link Team teams} currently in the pace. Whenever this object is saved or loaded from a file, it uses the
+ * {@link Json} tool to
+ * convert it
+ * to {@code JSON}.
+ */
 public class Pace {
 
 	private static final String fileExtension = ".pace";
@@ -19,6 +26,9 @@ public class Pace {
 	private List<Team> teams = new ArrayList<>();
 	private transient File file;
 
+	/**
+	 * Creates an empty {@link Pace} file
+	 */
 	public Pace() {
 
 	}
@@ -35,6 +45,11 @@ public class Pace {
 		return fromFile(fileChooser.showOpenDialog(Main.stage));
 	}
 
+	/**
+	 * Creates a new {@link Pace} object from a given file, setting the {@link #file} variable as the original file
+	 * @param file File containing the Json data of the {@link Pace}
+	 * @return A new {@link Pace} object with data extracted from the File's Json
+	 */
 	public static Pace fromFile(File file) {
 		if (file != null && file.exists()) try {
 			Pace pace = (Pace) Json.deserialize(new BufferedReader(new FileReader(file)), false, Pace.class);
@@ -124,6 +139,10 @@ public class Pace {
 		return teams;
 	}
 
+	/**
+	 * Returns only the {@link Team teams} that are not flagged as being excluded from the final scores
+	 * @return {@link List} of teams, excluding those marked as excluded from scores
+	 */
 	public List<Team> getTeamsNotExcluded() {
 		List<Team> includedTeams = new ArrayList<Team>();
 		for (Team team : teams)
@@ -137,6 +156,10 @@ public class Pace {
 		this.file = file;
 	}
 
+	/**
+	 * Attempts to save the {@link Pace} to the file specified. If the file does not exist, then it will ask the user
+	 * to select a new save location by calling the {@link #saveAs()} method
+	 */
 	public void save() {
 		if (file == null) {
 			saveAs();
@@ -148,6 +171,11 @@ public class Pace {
 		}
 	}
 
+	/**
+	 * Displays a new file chooser interface, asking the user to specify a file name and path to save the
+	 * {@link Pace} to
+	 * @see #save()
+	 */
 	public void saveAs() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Save Pace As");
@@ -165,7 +193,7 @@ public class Pace {
 	/**
 	 * Returns the places of a specific division
 	 *
-	 * @param division
+	 * @param division Specific Division to return the places for
 	 * @return {@link Team} array of all teams in that division, in order of closeness to the goal time <p>
 	 * Returns {@code Null} if {@code division} is null, if it cannot be found in the current list of divisions,
 	 * or if the {@code division} does not have a goal time.
@@ -179,7 +207,7 @@ public class Pace {
 	/**
 	 * Returns the places of a specific division
 	 *
-	 * @param division
+	 * @param division Specific Division to return the places for
 	 * @param includeExcluded Whether or not to include teams marked with the {@code excluded from scores} identifier.
 	 *                        If this is set to {@code true}, only teams that are not included (by default for
 	 *                        new teams) will be added to the places.

@@ -2,6 +2,13 @@ package Classes;
 
 import Application.Settings;
 
+/**
+ * An object containing data pertaining to a specific team.
+ * <p>
+ *     The {@link #excluded} identifier marks whether or not the team should be included in the final scores. If it
+ *     is set to true, then the team will not show up on any final scores by default.
+ * </p>
+ */
 public class Team {
 
     private String teamNumber;
@@ -93,14 +100,29 @@ public class Team {
         return builder.toString();
     }
 
+    /**
+     *
+     * @return the Start time presented as a String for use in places such as the Team Table (found in
+     * {@link Interface.ProgramTeams}
+     */
     public String getStartAsString() {
         return start != null ? start.toString(Settings.displayTwelveHour) : "";
     }
 
+    /**
+     *
+     * @return the Finish time presented as a String for use in places such as the Team Table (found in
+     *      {@link Interface.ProgramTeams}
+     */
     public String getFinishAsString() {
         return finish != null ? finish.toString(Settings.displayTwelveHour) : "";
     }
 
+    /**
+     *
+     * @return the Start time presented as a String for use in places such as the Team Table (found in
+     *      {@link Interface.ProgramTeams}
+     */
     public String getElapsedAsString() {
         return getElapsedTime() != null ? getElapsedTime().toString(false) : "";
     }
@@ -195,14 +217,35 @@ public class Team {
         return start == null ? Status.IN : finish == null ? Status.OUT : Status.BACK;
     }
 
+    /**
+     * Returns whether or not the {@link Team} is categorized under the given {@link Division}
+     * <p>
+     *     This method compares the names without case restrictions, so if the {@link Team} had it's division set as
+     *     "{@code HUnt}", this method will return {@code true} if asked to compare it to a {@link Division} named
+     *     "{@code hunt}".
+     * </p>
+     * @param division Division to check if the {@link Team} is part of it
+     * @return {@code True} if the team falls under the given {@link Division}, and {@code False} if it does not.
+     * @see Division
+     */
     public boolean isDivision(Division division) {
-        return division.getName().contentEquals(this.division);
+        return division.getName().toLowerCase().contentEquals(this.division.toLowerCase());
     }
 
+    /**
+     *
+     * @return Elapsed Time between the {@code Start} time and the {@code Finish} time.<br>Returns {@code null} if
+     * either the {@code start} or {@code finish} are null
+     */
     public TimeStamp getElapsedTime() {
         return (finish != null && start != null) ? finish.getDifference(start) : null;
     }
 
+    /**
+     *
+     * @return The very first line of the notes<br>In the case that the length of notes is 0 or {@code notes} is
+     * {@code null}, this method will return an empty {@link String}
+     */
     public String getNotesFirstLine() {
         return (notes != null && notes.length > 0) ? notes[0] : "";
     }
