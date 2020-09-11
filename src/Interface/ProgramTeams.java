@@ -1,15 +1,23 @@
 package Interface;
 
 import Classes.Team;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class ProgramTeams {
 
 	public static TableView<Team> table;
+	public static Text lastOut = new Text();
+	public static Text averageTime = new Text();
+	public static Text estimatedLastBack = new Text();
 
 	/**
 	 * @return Tab to display
@@ -20,7 +28,7 @@ public class ProgramTeams {
 		table = createTable();
 		updateTable();
 
-		VBox content = new VBox(table);
+		VBox content = new VBox(table, additionalInfo());
 
 		tab.setContent(content);
 
@@ -92,6 +100,23 @@ public class ProgramTeams {
 		table.getItems().clear();
 		table.getItems().addAll(Program.pace.getTeams());
 
+	}
+
+	private static Node additionalInfo() {
+		GridPane grid = new GridPane();
+		grid.setPadding(new Insets(10));
+		grid.setHgap(7.5);
+		grid.setVgap(7.5);
+
+		Button bCreate = new Button("New Team");
+		bCreate.setOnAction(e -> new ProgramEditTeam(null));
+		grid.add(bCreate, 0, 0);
+
+		Button bStreamline = new Button("Mass Import");
+		grid.add(bStreamline, 1, 0);
+
+
+		return grid;
 	}
 
 }

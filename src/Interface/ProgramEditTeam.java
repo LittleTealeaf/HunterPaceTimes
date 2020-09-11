@@ -20,6 +20,7 @@ public class ProgramEditTeam {
 
 		stage = new Stage();
 		stage.setWidth(500);
+		stage.setTitle(t == null ? "Create Team" : "Edit Team");
 
 		GridPane content = new GridPane();
 		content.setVgap(7.5);
@@ -53,6 +54,9 @@ public class ProgramEditTeam {
 			team.setTeamNumber(tNumber.getText());
 			team.setDivision(tDivision.getText());
 			team.setNames(tNames.getText());
+			if (t == null) {
+				Program.pace.addTeam(team);
+			}
 			ProgramTeams.updateTable();
 			stage.close();
 		});
