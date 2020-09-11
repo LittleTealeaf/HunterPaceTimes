@@ -10,6 +10,7 @@ public class Settings {
 	public static boolean showCrashReports = true;
 	public static boolean updateDivisionsOnTeamsEdit = true;
 	public static List<String> recentFiles = new ArrayList<>();
+	public static boolean displayTwelveHour = true;
 
 	public static class ApplicationDisplay {
 		public static double height = 400;

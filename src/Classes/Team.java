@@ -1,5 +1,7 @@
 package Classes;
 
+import Application.Settings;
+
 public class Team {
 
     private String teamNumber;
@@ -71,6 +73,26 @@ public class Team {
     public Team setNames(String[] names) {
         this.names = names;
         return this;
+    }
+
+    public String getNamesAsString() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < names.length; i++) {
+            builder.append(names[i] + (i < names.length - 1 ? ", " : ""));
+        }
+        return builder.toString();
+    }
+
+    public String getStartAsString() {
+        return start.toString(Settings.displayTwelveHour);
+    }
+
+    public String getFinishAsString() {
+        return finish.toString(Settings.displayTwelveHour);
+    }
+
+    public String getElapsedAsString() {
+        return getElapsedTime().toString(false);
     }
 
     /**
