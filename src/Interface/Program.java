@@ -14,13 +14,13 @@ public class Program {
 
 		pace = oPace;
 
-
 		BorderPane content = new BorderPane();
 
 		TabPane tabPane = new TabPane();
 		tabPane.getTabs().addAll(ProgramTeams.getTab());
 		for (Tab tab : tabPane.getTabs()) {
 			tab.setClosable(false);
+			tab.getContent().autosize();
 		}
 
 		content.setCenter(tabPane);

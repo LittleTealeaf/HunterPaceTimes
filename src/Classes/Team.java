@@ -75,10 +75,20 @@ public class Team {
         return this;
     }
 
+    /**
+     * Changes the {@link Team} {@code names}
+     *
+     * @param names List of names of each of the riders separated by line breaks (\n)
+     * @return {@link Team} object with the modified {@code names}.
+     */
+    public Team setNames(String names) {
+        return setNames(names.split("\n"));
+    }
+
     public String getNamesAsString() {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < names.length; i++) {
-            builder.append(names[i] + (i < names.length - 1 ? ", " : ""));
+            builder.append(names[i] + (i < names.length - 1 ? "\n" : ""));
         }
         return builder.toString();
     }

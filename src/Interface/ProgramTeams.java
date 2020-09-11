@@ -2,15 +2,10 @@ package Interface;
 
 import Classes.Team;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class ProgramTeams {
 
@@ -27,7 +22,6 @@ public class ProgramTeams {
 
 		VBox content = new VBox(table);
 
-
 		tab.setContent(content);
 
 
@@ -38,8 +32,11 @@ public class ProgramTeams {
 	 * Creates the table to list all riders
 	 * <p>
 	 * The table contains the following columns: <i>Team, Division, Riders, Times (Start, Finish, Elapsed), and
-	 * Notes</i>. Each one has a display type factor of {@link String}. <i>Riders</i> uses a custom cell
-	 * display found in {@link #getNamesCell()} <br> Each column cannot be reordered or edited.
+	 * Notes</i>. Each one has a display type factor of {@link String}. <br>Each column cannot be reordered or edited.
+	 * </p>
+	 * <p>
+	 * Double clicking on a team will open up an editing window, allowing the user the edit the details of that
+	 * team.
 	 * </p>
 	 *
 	 * @return Table with riders of the pace
@@ -48,6 +45,11 @@ public class ProgramTeams {
 		TableView<Team> table = new TableView<>();
 		table.setEditable(false);
 
+		table.setOnMouseClicked(e -> {
+			if (e.getClickCount() == 2 && table.getSelectionModel().getSelectedIndex() != -1) {
+				new ProgramEditTeam(table.getSelectionModel().getSelectedItem());
+			}
+		});
 
 		TableColumn<Team, String> cNumber = new TableColumn<>("Team"),
 				cDivision = new TableColumn<>("Division"),
@@ -57,11 +59,6 @@ public class ProgramTeams {
 				ctFinish = new TableColumn<>("Finish"),
 				ctElapsed = new TableColumn<>("Elapsed"),
 				cNotes = new TableColumn<>("Notes");
-
-		//Custom Cell Displays:
-		cNames.setCellFactory(c -> {
-			return getNamesCell();
-		});
 
 		//Assign Columns to variables
 		cNumber.setCellValueFactory(new PropertyValueFactory<Team, String>("teamNumber"));
@@ -87,35 +84,10 @@ public class ProgramTeams {
 		return table;
 	}
 
-	private static void updateTable() {
+	public static void updateTable() {
 		table.getItems().clear();
 		table.getItems().addAll(Program.pace.getTeams());
 
-	}
-
-	/**
-	 * Custom Formatting for the Names column
-	 *
-	 * @return TableCell formatted for Names
-	 */
-	public static TableCell<Team, String> getNamesCell() {
-		return new TableCell<Team, String>() {
-			@Override
-			protected void updateItem(String item, boolean empty) {
-				super.updateItem(item, empty);
-				if (item == null || empty) {
-					setGraphic(null);
-				} else {
-					VBox vbox = new VBox();
-					List<String> textList = Arrays.asList(item.split(", "));
-					for (int i = 0; i < textList.size(); i++) {
-						Text lbl = new Text(textList.get(i));
-						vbox.getChildren().add(lbl);
-					}
-					setGraphic(vbox);
-				}
-			}
-		};
 	}
 
 }
