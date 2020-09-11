@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Settings {
 
-	private static final ApplicationDisplay applicationDisplay = new ApplicationDisplay();
+	private static ApplicationDisplay applicationDisplay = new ApplicationDisplay();
 	/**
 	 * Whether or not the program should display crash reports (TODO implement)
 	 */
@@ -43,7 +43,7 @@ public class Settings {
 	 * changes / new settings that the current file does not have
 	 */
 	public static void load() {
-
+		applicationDisplay = new ApplicationDisplay();
 		try {
 			Json.readObject(true, Settings.class, "Settings.json");
 		} catch (Exception ignore) {
@@ -67,6 +67,7 @@ public class Settings {
 		public static double height = 400;
 		public static double width = 500;
 		public static boolean fullscreen = false;
+
 		public ApplicationDisplay() {
 		}
 	}
